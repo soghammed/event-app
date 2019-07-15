@@ -15,6 +15,12 @@ class EventsController extends Controller
     }
 
     public function create(Request $request){
+        $request->validate([
+            'name' => 'required|string',
+            'date' => 'required',
+            'initialTicketCount' => 'required'
+        ]);
+
     	$newEvent = Events::create([
     		'name' => $request->name,
     		'date' => $request->date,
@@ -38,18 +44,15 @@ class EventsController extends Controller
     {
         // dd($request, $request->event_id);
         $request->validate([
-            'name' => 'required',
-            'date' => 'required',
-            'initialTicketCount' => 'required',
             'event_id' => 'required'
         ]);
 
         $event = Events::find($request->event_id) ? Events::find($request->event_id) : die('Event wasn\'t found');
         
         $event->update([
-            "name" => $request->name,
-            "date" => $request->date,
-            "initialTicketCount" => $request->initialTicketCount
+            "name" => trim($request->name) != '' ? $request->name : $event->name,
+            "date" => trim($request->date) != '' ? $request->date : $event->date
+            // "initialTicketCount" => trim($request->initialTicketCount) != '' ? $request->initialTicketCount : $event->initialTicketCount
         ]);
 
         return \Response::json(['message' => 'success'], 200);
@@ -57,7 +60,7 @@ class EventsController extends Controller
 
     public function events(Request $request)
     {
-        return new EventsResource(Events::all());
+        return new EventsResource(Events::orderBy('id', 'desc')->get());
     }
 
     public function event($id)

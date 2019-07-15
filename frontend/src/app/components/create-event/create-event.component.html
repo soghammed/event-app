@@ -1,5 +1,13 @@
 <div class="col-10 offset-1 card-dark alignC">
 	<form [formGroup]="newEvent" (ngSubmit)="onSubmit(newEvent.value)">
+		<div *ngIf="errors" class="alert alert-gold">
+			<ul *ngFor="let error of errors | keyvalue">
+				<li>{{ error.value[0] }}</li>
+			</ul>
+		</div>
+		<div *ngIf="notification" class="alert alert-success">
+			<p>{{ notification }}</p>
+		</div>
 		<div class="form-group">
 			<label for="name">Name:</label>
 			<input type="text" id="name" class="form-control" formControlName="name" required/>

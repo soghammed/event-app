@@ -20,7 +20,7 @@ export class EventsComponent implements OnInit, OnChanges {
         (res) => {
           // console.log(res.data, res);
           
-          this.events = res.data;
+          this.events = res['data'];
           return 1;
         }
       )

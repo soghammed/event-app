@@ -12,6 +12,7 @@ export class TicketComponent implements OnInit {
 	@Input() tid: number;
 	ticket;
 	action: string = '';
+  response: any;
   constructor(
   	private ts: TicketService,
   	private route: ActivatedRoute
@@ -24,7 +25,7 @@ export class TicketComponent implements OnInit {
   		this.ts.getStatus(this.tid)
   			.subscribe(res => {
   				console.log('status res', res);
-  				this.response = res.result;
+  				this.response = res['result'];
   			},
   			(err) => {
   				console.log('here', err);
@@ -34,7 +35,7 @@ export class TicketComponent implements OnInit {
   		this.action = "redeem";
   		this.ts.redeemTicket(this.tid)
   			.subscribe(res => {
-  				this.response = res.result;
+  				this.response = res['result'];
   			}, 
   			(err) => this.response = err.statusText);
   	}

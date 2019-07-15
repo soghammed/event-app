@@ -36,10 +36,11 @@ export class EditEventComponent implements OnInit {
     // formVal.event_id = this.eventid;
   	this.es.editEvent(formVal, this.id)
   		.subscribe(res => {
-  			// console.log(res, res.message);
+  			//undo by setting notificaion 
+  			console.log(res, res['message']);
   		this.errors = null;
   		// if()
-        // this.notification = res.message;
+        this.notification = res['message'];
         // window.location.reload();
       },
       err => {

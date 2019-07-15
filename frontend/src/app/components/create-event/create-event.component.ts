@@ -10,6 +10,8 @@ import { EventsService } from '../../services/events.service';
 export class CreateEventComponent implements OnInit {
   newEvent: FormGroup;
   formview: string = 'new';
+  errors: [];
+  notification: string;
   constructor(private es:EventsService) { 
   	// console.log(this);
   }
@@ -29,10 +31,23 @@ export class CreateEventComponent implements OnInit {
   onSubmit(formVal){
     console.log(formVal);
   	this.es.createEvent(formVal)
-  		.subscribe(res => {
-        // console.log('createevent res', res);
-        window.location.href = "/";
-      });
+      .subscribe(res => {
+        console.log(res, res['message']);
+          this.errors = null;
+          // if()
+          this.notification = res['message'];
+          // window.location.reload();
+          setTimeout(() => {
+            window.location.href = "/";
+            
+          }, 2000);
+        },
+        err => {
+          this.notification = null;
+          this.errors = err.error.errors;
+          // document.getElementsById('').innerHTML = 
+        }
+      );
   }
 
 }

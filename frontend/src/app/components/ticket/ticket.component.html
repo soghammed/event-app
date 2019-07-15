@@ -1,7 +1,9 @@
-<div *ngIf="action == 'status'">
-	<h3>Ticket Status: {{ response }}</h3>
-</div>
+<div class="col-10 offset-1 card card-dark alignC">
+	<div *ngIf="action == 'status'">
+		<h3>Ticket Status: {{ response }}</h3>
+	</div>
 
-<div *ngIf="action == 'redeem'">
-	<h3>Ticket Redeem: {{ response }}</h3>
+	<div *ngIf="action == 'redeem'">
+		<h3>Ticket Redeem: {{ response }}</h3>
+	</div>
 </div>

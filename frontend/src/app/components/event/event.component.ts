@@ -13,17 +13,17 @@ import { ExportToCsv } from 'export-to-csv';
 })
 export class EventComponent implements OnInit,AfterViewInit {
 	
-	@Input() event: Event[];
-	@Input() events: Event[];
-	currentUrl: boolean = false;
+  @Input() event: Event;
+  @Input() events: Event[];
+  currentUrl: boolean = false;
   notification: string;
   spawn: string = "<div class='spinner-border text-warning' role='status'><span class='sr-only'>Loading...</span></div>";
   loading: boolean = true;
   constructor(
-  		private route: ActivatedRoute,
-  		private http: HttpClient,
-  		private es: EventsService
-  	) {}
+      private route: ActivatedRoute,
+      private http: HttpClient,
+      private es: EventsService
+    ) {}
 
   ngOnInit() {
   	if(!this.event){
@@ -31,10 +31,12 @@ export class EventComponent implements OnInit,AfterViewInit {
       this.es.getEvent(id)
         .subscribe( res => {
           this.loading = false;
-          console.log(res);
+          // res['EventData'][0].availableTicketCount = res['availableTicketCount'];
+          // res['EventData'][0].redeemedTicketCount = res.['redeemedTicketCount'];
           this.event = res['EventData'][0];
-          this.event.availableTicketCount = res.availableTicketCount;
-          this.event.redeemedTicketCount = res.redeemedTicketCount;
+          this.event.availableTicketCount = res['availableTicketCount'];
+          this.event.redeemedTicketCount = res['redeemedTicketCount'];
+          console.log('38', this.event);
         });
   		// console.log(id);
   		// this.event = this.es.getEvents().find((event, ind) => {
@@ -56,8 +58,8 @@ export class EventComponent implements OnInit,AfterViewInit {
     this.es.getEvent(event_id)
       .subscribe( res => {
         console.log('refresCounters', res);
-        this.event.availableTicketCount = res.availableTicketCount;
-        this.event.redeemedTicketCount = res.redeemedTicketCount;
+        this.event.availableTicketCount = res['availableTicketCount'];
+        this.event.redeemedTicketCount = res['redeemedTicketCount'];
         this.loading = false;
       })
   }
@@ -81,17 +83,17 @@ export class EventComponent implements OnInit,AfterViewInit {
     this.loading = true;
     this.es.redeemTicket(event_id)
       .subscribe(res => {
-          this.notification = res.message;
+          this.notification = res['message'];
           this.loading = false;
-          if(!res.message.match(/(No)/g)){
+          if(!res['message'].match(/(No)/g)){
             setTimeout(() => {
               this.refreshCounters(event_id);            
             }, 2000);
           }
       },
       err => {
-        // console.log(err.message);
-        // this.notification = err.message;
+        console.log(err['message']);
+        this.notification = err['message'];
       });
   }
 
@@ -99,7 +101,7 @@ export class EventComponent implements OnInit,AfterViewInit {
   {
     this.es.downloadOkTickets(event_id)
       .subscribe(res => {
-        if(res.length){
+        if(Object.keys(res).length){
           const options = {
             fieldSeparator: ',',
             quoteStrings: '"',
@@ -126,7 +128,7 @@ export class EventComponent implements OnInit,AfterViewInit {
   {
     this.es.downloadNewTickets(event_id)
       .subscribe(res => {
-        if(res.length){
+        if(Object.keys(res).length){
           console.log('downloadnewTickets', res);
           const options = {
             fieldSeparator: ',',
