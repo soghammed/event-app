@@ -10,6 +10,12 @@ body{
 		border-color:gold;
 	}
 }
+hr{
+	background-color:grey;
+}
+.limit-width{
+	width:20%;
+}
 a{
 	color:gold;
 	&:focus,&:hover{
