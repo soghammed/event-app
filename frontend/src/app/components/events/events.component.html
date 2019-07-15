@@ -1,6 +1,6 @@
 <div>
 	<div class="col-10 offset-1 card card-dark alignC">
-	<h2>Events</h2>
+		<h2>Events</h2>
 		<div class="spinner-border text-warning" *ngIf="!events" role="status">
 		  <span class="sr-only">Loading...</span>
 		</div>
@@ -9,6 +9,15 @@
 			[events]="events"
 			[event]="event">
 		</app-event>
+		<hr>
+		<h2>Redeem</h2>
+		<hr>
+		<h2>Status</h2>
+		<div class="form-group">
+			<input type="text" class="form-control" id="status" placeholder="Ticket ID i.e 1340" />
+			<button type="submit" class="btn btn-dark">Check Status</button>
+		</div>
+		<hr>
 	</div>
 </div>
 <router-outlet></router-outlet>
