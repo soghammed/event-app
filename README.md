@@ -9,5 +9,5 @@ php artisan migrate
 php artisan db:seed    
 cd frontend   
 npm install   
-npm serve
+ng serve
 ```
