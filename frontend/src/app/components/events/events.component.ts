@@ -27,14 +27,14 @@ export class EventsComponent implements OnInit {
   }
 
   checkStatus(){
-    const eventId = document.getElementById('ticket_status').value;
-    // console.log(eventId);
+    const eventId = document.getElementById('ticket_status')['value'];
+    console.log(eventId);
     window.location.href = "/status/"+eventId;
   }
 
   redeemTicket(){
-    const eventId = document.getElementById('ticket_redeem').value;
-    // console.log(eventId);
+    const eventId = document.getElementById('ticket_redeem')['value'];
+    console.log(eventId);
     window.location.href= "/redeem/"+eventId;
   }
 }
