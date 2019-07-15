@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EventsService } from '../../services/events.service';
 import { Event } from '../../models/Event'; 
 @Component({
@@ -6,7 +6,7 @@ import { Event } from '../../models/Event';
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.scss']
 })
-export class EventsComponent implements OnInit, OnChanges {
+export class EventsComponent implements OnInit {
 	events: Event[];
   constructor(
   		private es:EventsService
@@ -26,7 +26,15 @@ export class EventsComponent implements OnInit, OnChanges {
       )
   }
 
-  ngOnChanges(changes){
-    console.log('update view');
+  checkStatus(){
+    const eventId = document.getElementById('ticket_status').value;
+    // console.log(eventId);
+    window.location.href = "/status/"+eventId;
+  }
+
+  redeemTicket(){
+    const eventId = document.getElementById('ticket_redeem').value;
+    // console.log(eventId);
+    window.location.href= "/redeem/"+eventId;
   }
 }
