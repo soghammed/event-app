@@ -1,0 +1,33 @@
+<div class="" *ngIf="currentUrl">
+	<a class="badge badge-dark" routerLink="/event/{{event.id}}">{{ event.name}}</a>
+</div>
+<div class="card card-dark col-10 offset-1 alignC" *ngIf="!event">
+	<div class="spinner-border text-warning" role="status">
+	  <span class="sr-only">Loading...</span>
+	</div>
+</div>
+<div class="card card-dark col-10 offset-1 alignC" *ngIf="!currentUrl && event">
+	<div style="position:absolute;top:0px;right:40px;"><a routerLink="/edit-event/{{event.id}}"><i class="fa fa-pencil"></i></a></div>
+	<h2>Event:</h2>
+	<div><b>Name:</b> {{ event.name }}</div>
+	<div><b>Date:</b> {{ event.date }}</div>
+	<div><b>Tickets Count:</b> {{  event.availableTicketCount + event.redeemedTicketCount }}</div>
+	<div><b>Tickets Available:</b> {{ event.availableTicketCount }}</div>
+	<div><b>Redeemed Tickets:</b> {{ event.redeemedTicketCount }}</div>
+	<hr>
+	<div *ngIf="notification" class="alert alert-gold">{{notification}}</div>
+	<h2>Actions 
+		<div class="spinner-border text-warning" *ngIf="loading" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+	</h2>
+	<div class="row" style="text-align:center">
+		<div class="col-xs-12 col-lg-2"><button class="btn btn-sm btn-dark" (click)="refreshCounters(event.id)"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh Counters</button></div>
+		<div class="col-xs-12 col-lg-2"><button class="btn btn-sm btn-dark" (click)="addTicketHandle(event.id)"><i class="fa fa-ticket"></i>&nbsp;&nbsp;Generate Ticket</button></div>
+		<div class="col-xs-12 col-lg-2"><button class="btn btn-sm btn-dark" (click)="downloadNewTickets(event.id)"><i class="fa fa-download"></i>&nbsp;&nbsp;Download New Tickets</button></div>
+		<div class="col-xs-12 col-lg-2"><button class="btn btn-sm btn-dark" (click)="downloadOkTickets(event.id)"><i class="fa fa-download"></i>&nbsp;&nbsp;Download Non-redeemed Tickets</button></div>
+		<div class="col-xs-12 col-lg-2"><button class="btn btn-sm btn-dark" (click)="redeemTicketHandle(event.id)"><i class="fa fa-ticket"></i>&nbsp;&nbsp;Redeem Ticket NOW!</button></div>
+	</div>
+</div>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<router-outlet></router-outlet>

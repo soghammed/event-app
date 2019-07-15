@@ -1,0 +1,52 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+	background-color:#2d2d2d;
+}
+.form-control{
+	background-color:#111111;
+	&:focus{
+		background-color:#111111;
+		color:gold;
+		border-color:gold;
+	}
+}
+a{
+	color:gold;
+	&:focus,&:hover{
+		color:gold;
+		text-decoration:none;
+	}
+}
+.app-container{
+	padding:20px 0 20px 40px;
+	margin-top:20px;
+}
+.alert-gold{
+	background-color:gold;
+}
+.alert{
+	color:black !important;
+}
+.btn-sm{
+	width:100%;
+}
+.card-dark{
+	h2{
+		color:white;
+	}
+	div,.btn-dark{
+		color:lightgrey;
+	}
+
+	background-color:#111111;
+}
+.card{
+	border-radius:0px;
+}
+.eventLinks{
+//	margin:20px;
+}
+
+.alignC{
+	padding:0 40px 40px 40px;
+}

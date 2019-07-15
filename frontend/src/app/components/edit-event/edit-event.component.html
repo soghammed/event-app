@@ -1,0 +1,30 @@
+<div class="col-10 offset-1 card-dark alignC">
+	<form [formGroup]="editEvent" (ngSubmit)="onSubmit(editEvent.value)">
+		<div *ngIf="errors" class="alert alert-gold">
+			<ul *ngFor="let error of errors | keyvalue">
+				<li>{{ error.value[0] }}</li>
+			</ul>
+		</div>
+		<div *ngIf="notification" class="alert alert-success">
+			<p>{{ notification }}</p>
+		</div>
+		<div class="form-group">
+			<label for="Name">Name:</label>
+			<input type="text" class="form-control" formControlName="name" id="Name" required/>
+		</div>
+		<div class="form-group">
+			<label>Date:</label>
+			<input type="date" class="form-control" formControlName="date"  required/>
+		</div>
+		<div class="form-group">
+			<label>Initial Tickets Available:</label>
+			<input type="number" class="form-control" formControlName="initialTicketCount" required/>
+		</div>
+		<br>
+		<div class="col-2 offset-5">
+			<input class="btn btn-sm btn-dark" type="submit" value="Update"/>
+		</div>
+		
+	</form>
+</div>
+<router-outlet></router-outlet>

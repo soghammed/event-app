@@ -1,0 +1,14 @@
+<div>
+	<div class="col-10 offset-1 card card-dark alignC">
+	<h2>Events</h2>
+		<div class="spinner-border text-warning" *ngIf="!events" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+		<app-event
+			*ngFor="let event of events"
+			[events]="events"
+			[event]="event">
+		</app-event>
+	</div>
+</div>
+<router-outlet></router-outlet>
