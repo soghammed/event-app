@@ -65,6 +65,8 @@ class EventsController extends Controller
 
     public function event($id)
     {
+        $details = Tickets::summaryCount();
+        
         return [
             "availableTicketCount" => Tickets::availableCount($id),
             "redeemedTicketCount" => Tickets::redeemedCount($id),
